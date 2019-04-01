@@ -50,6 +50,14 @@ async function getRawHtmlFromBtag(btag, platform) {
             }
         });
 
+        const accountData = await getAccountByName(btag).catch((err) => {
+            throw err;
+        });
+
+        if (accountData[0].isPublic === false) {
+            throw 'ACCOUNT_PRIVATE';
+        }
+
         return getProfileData;
     } catch(e) {
         throw e;
