@@ -29,7 +29,7 @@ async function getRawHtmlFromBtag(btag, platform) {
 
         const options = {
             uri,
-            timeout: 10000
+            timeout: 20000
         };
         
         const getProfileData = await rp(options)
