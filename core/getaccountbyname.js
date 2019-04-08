@@ -2,6 +2,7 @@ const rp = require('request-promise');
 
 async function getAccountByName(btag) {
     const serializedBtag = encodeURIComponent(btag.replace('-','#'));
+    console.log("https://playoverwatch.com/en-us/search/account-by-name/" + serializedBtag);
     const searchUser = await rp({
         uri: `https://playoverwatch.com/en-us/search/account-by-name/${serializedBtag}`,
         json: true,
