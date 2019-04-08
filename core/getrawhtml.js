@@ -2,6 +2,8 @@ const rp = require('request-promise');
 const cheerio = require('cheerio');
 const getAccountByName = require('./getaccountbyname');
 
+rp.timeout = 20000;
+
 const regPathFix = {
     pc: '/career/pc/',
     xbl: '/career/xbl/',
@@ -36,6 +38,8 @@ async function getRawHtmlFromBtag(btag, platform) {
         .then(function (htmlString) {
             if (htmlString.search("Profile Not Found") !== -1) {
                 throw 'PLAYER_NOT_EXIST';
+            } else if (htmlString.search("THIS PROFILE IS PRIVATE") !== -1) {
+                throw 'ACCOUNT_PRIVATE';
             } else if (htmlString.search("I Need Healing") !== -1) {
                 throw 'API_DOWN';
             } else {
@@ -49,14 +53,6 @@ async function getRawHtmlFromBtag(btag, platform) {
                 throw err;
             }
         });
-
-        const accountData = await getAccountByName(btag).catch((err) => {
-            throw err;
-        });
-
-        if (accountData[0].isPublic === false) {
-            throw 'ACCOUNT_PRIVATE';
-        }
 
         return getProfileData;
     } catch(e) {
