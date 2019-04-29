@@ -48,7 +48,7 @@ async function getRawHtmlFromBtag(btag, platform) {
         })
         .catch((err) => {
             if (err.statusCode === 404) {
-                throw 'PLAYER_NOT_EXIST';
+                throw 'API_ERROR';
             } else {
                 throw err;
             }
