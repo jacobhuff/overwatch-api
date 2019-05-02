@@ -28,8 +28,6 @@ async function getRawHtmlFromBtag(btag, platform) {
 
             uri = `https://playoverwatch.com/en-us/career/${accountData[0].platform}/${accountData[0].urlName}`;
         }
-
-        console.log("URI: " + uri);
         
         const options = {
             uri,
