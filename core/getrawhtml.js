@@ -36,7 +36,9 @@ async function getRawHtmlFromBtag(btag, platform) {
         
         const getProfileData = await rp(options)
         .then(function (htmlString) {
-            if (htmlString.search("Profile Not Found") !== -1) {
+            if (htmlString === undefined) {
+                throw 'UNDEFINED_HTML';   
+            } else if (htmlString.search("Profile Not Found") !== -1) {
                 throw 'PLAYER_NOT_EXIST';
             } else if (htmlString.search("THIS PROFILE IS PRIVATE") !== -1) {
                 throw 'ACCOUNT_PRIVATE';
