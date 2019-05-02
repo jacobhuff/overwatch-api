@@ -27,7 +27,10 @@ async function general(btag, platform, html) {
             data.rank_name = tier[$('.competitive-rank > img').attr('src').replace('https://d1u1mce87gyfbn.cloudfront.net/game/rank-icons/season-2/', '')];
         }
 
-        data.bnet_id = $('script:contains(\'window.app.career.init\')').html().replace(/\D/g, '');
+        data.bnet_id = $('script:contains(\'window.app.career.init\')').html();
+        if (data.bnet_id !== null) {
+            data.bnet_id.replace(/\D/g, '');
+        }
         data.prestige = prestige($('.player-level')
             .attr('style')
             .replace('background-image:url(https://d1u1mce87gyfbn.cloudfront.net/game/playerlevelrewards/', '').replace('_Border.png)', ''));
