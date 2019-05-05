@@ -31,9 +31,11 @@ async function general(btag, platform, html) {
         if (data.bnet_id !== null) {
             data.bnet_id.replace(/\D/g, '');
         }
-        data.prestige = prestige($('.player-level')
-            .attr('style')
-            .replace('background-image:url(https://d1u1mce87gyfbn.cloudfront.net/game/playerlevelrewards/', '').replace('_Border.png)', ''));
+        if (prestige($('.player-level') !== undefined) {
+            data.prestige = prestige($('.player-level')
+                .attr('style')
+                .replace('background-image:url(https://d1u1mce87gyfbn.cloudfront.net/game/playerlevelrewards/', '').replace('_Border.png)', ''));
+        }
         data.level = $('.masthead-player .player-level').text();
         data.profile = $('.player-portrait').attr('src');
 
